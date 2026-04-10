@@ -1,6 +1,7 @@
 import asyncio
 import pandas as pd
 from transformers import pipeline
+from langchain.tools import tool
 
 sentiment_classifier = pipeline(
     "sentiment-analysis",
@@ -8,10 +9,35 @@ sentiment_classifier = pipeline(
 )
 
 async def analyze_single_feedback(text):
-    result = sentiment_classifier(text[:512])[0] 
+    result = sentiment_classifier(text[:512])[0]
     return text, result['label']
 
-async def semantic_feedback(feedback_input):
+feedback_input = r"data\Feedback.xlsx"
+@tool
+async def semantic_feedback_tool():
+    """
+    Analyze user feedback using a lightweight transformer model and return
+    structured sentiment insights for decision-making in a multi-agent system.
+    This tool classifies feedback into positive, negative, and neutral categories,
+    identifies dominant sentiment, and extracts key issues from negative feedback.
+    Returns:
+        dict:
+            {
+                "sentiment_summary": {
+                    "positive": int,
+                    "negative": int,
+                    "neutral": int,
+                    "total": int,
+                    "overall_sentiment": "positive | negative | neutral"
+                },
+                "key_issues": [list of negative feedback samples]
+            }
+
+    Notes:
+        - Uses DistilBERT for lightweight sentiment analysis
+        - Processes feedback asynchronously for scalability
+        - Designed for use by Marketing/Comms and Risk agents
+    """
     if isinstance(feedback_input, str):
         df = pd.read_excel(feedback_input)
         feedback_list = df['feedback'].dropna().tolist()
@@ -36,6 +62,7 @@ async def semantic_feedback(feedback_input):
             neutral.append(text)
 
     total = len(feedback_list)
+
     if len(negative) > len(positive):
         overall = "negative"
     elif len(positive) > len(negative):
@@ -53,4 +80,3 @@ async def semantic_feedback(feedback_input):
         },
         "key_issues": list(key_issues_set)
     }
-

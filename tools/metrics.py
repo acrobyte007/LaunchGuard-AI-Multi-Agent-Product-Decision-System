@@ -1,6 +1,41 @@
 import pandas as pd
+from langchain.tools import tool
 
-async def summarize_metrics(csv_file_path):
+csv_file_path=r"data\product_metrics_variable.csv"
+@tool
+async def summarize_metrics():
+    """
+    Analyze time-series product metrics and return structured trend insights
+    for use in a multi-agent decision system.
+    This tool computes the directional trend (increasing, decreasing, stable),
+    absolute change, and boundary values (start and end) for each numeric metric.
+    It also categorizes metrics into positive, negative, and critical trends
+    based on their behavior.
+    Returns:
+        dict:
+            {
+                "metric_trends": {
+                    "<metric_name>": {
+                        "trend": "increasing | decreasing | stable",
+                        "change": float,
+                        "start_value": float,
+                        "end_value": float
+                    },
+                    ...
+                },
+                "summary": {
+                    "positive_trends": [<metric_names>],
+                    "negative_trends": [<metric_names>],
+                    "critical_trends": [<metric_names>]
+                }
+            }
+    Notes:
+        - Operates on internally defined or preloaded dataset
+        - Automatically detects numeric columns without hardcoding
+        - Designed for use by the Data Analyst Agent
+        - Output is structured for downstream agents (Risk, PM, Orchestrator)
+    """
+   
     df = pd.read_csv(csv_file_path)
     metrics = [col for col in df.columns if col.lower() != "date"]
     metric_trends = {}
@@ -47,3 +82,6 @@ async def summarize_metrics(csv_file_path):
         "metric_trends": metric_trends,
         "summary": summary
     }
+
+
+

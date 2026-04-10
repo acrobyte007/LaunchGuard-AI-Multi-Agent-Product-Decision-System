@@ -2,3 +2,8 @@ pandas
 transformers
 torch
 openpyxl
+langchain
+langgraph
+langchain-mistralai
+pydantic
+python-dotenv
