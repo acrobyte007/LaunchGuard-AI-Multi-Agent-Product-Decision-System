@@ -4,6 +4,7 @@ from langchain_mistralai import ChatMistralAI
 from langchain.agents import create_agent
 from pydantic import BaseModel, Field
 from typing import List
+from langchain_core.tracers.stdout import ConsoleCallbackHandler
 from tools.metrics import summarize_metrics
 from tools.anomaly_detection import anomaly_detection
 
@@ -65,8 +66,10 @@ async def run_data_analyst_agent():
             "content": "Please analyze the product metrics and provide a concise summary."
         }
     ]
-
-    response = await agent.ainvoke({"messages": messages})
+    config = {
+        "callbacks": [ConsoleCallbackHandler()] 
+    }
+    response = await agent.ainvoke({"messages": messages}, config=config)
     result=(response["structured_response"])
     return result
 

@@ -6,13 +6,12 @@ from datetime import datetime
 from dotenv import load_dotenv
 from typing import TypedDict, Dict, Any
 from langgraph.graph import StateGraph, END
-
 from agents.data_analyst_agent import run_data_analyst_agent
 from agents.marketing_agent import run_marketing_agent
 from agents.risk_agent import run_risk_agent
 from agents.product_manager_agent import run_pm_agent
-
-load_dotenv()
+import os
+file_path = os.path.join(os.path.dirname(__file__), 'data', 'release_notes.txt')
 
 logging.basicConfig(
     filename="war_room.log",
@@ -22,20 +21,8 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
-RELEASE_NOTES = """
-Feature: Smart Auto-Pay for Subscriptions
-Overview:
-Auto payment for subscriptions.
-Success Metrics:
-- Crash rate < 2%
-- Latency < 400 ms
-- Adoption > 60%
-Known Issues:
-- Payment failures
-- App crashes
-- High latency
-"""
+with open(file_path, 'r', encoding='utf-8') as file:
+    RELEASE_NOTES = file.read().strip()
 
 class WarRoomState(TypedDict):
     data_output: Dict[str, Any]

@@ -2,6 +2,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_mistralai import ChatMistralAI
 from langchain.agents import create_agent
+from langchain_core.tracers.stdout import ConsoleCallbackHandler
 from pydantic import BaseModel, Field
 from typing import List
 from tools.feedback_scoring import semantic_feedback_tool
@@ -53,8 +54,10 @@ async def run_marketing_agent():
             "content": "Analyze user feedback and provide sentiment insights."
         }
     ]
-
-    response = await agent.ainvoke({"messages": messages})
+    config = {
+        "callbacks": [ConsoleCallbackHandler()]
+    }
+    response = await agent.ainvoke({"messages": messages}, config=config) 
     return response["structured_response"]
 
 

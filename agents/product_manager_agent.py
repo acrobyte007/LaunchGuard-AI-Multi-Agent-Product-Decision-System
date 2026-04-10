@@ -2,6 +2,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_mistralai import ChatMistralAI
 from langchain.agents import create_agent
+from langchain_core.tracers.stdout import ConsoleCallbackHandler
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any
 load_dotenv()
@@ -88,6 +89,9 @@ Make the final launch decision.
 """
         }
     ]
-    response = await agent.ainvoke({"messages": messages})
+    config = {
+        "callbacks": [ConsoleCallbackHandler()]
+    }
+    response = await agent.ainvoke({"messages": messages}, config=config)
     return response["structured_response"]
 

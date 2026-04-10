@@ -2,6 +2,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_mistralai import ChatMistralAI
 from langchain.agents import create_agent
+from langchain_core.tracers.stdout import ConsoleCallbackHandler
 from pydantic import BaseModel, Field
 from typing import List
 from tools.anomaly_detection import anomaly_detection
@@ -57,8 +58,10 @@ async def run_risk_agent():
             "content": "Analyze anomalies in product metrics and identify risks."
         }
     ]
-
-    response = await agent.ainvoke({"messages": messages})
+    config = {
+        "callbacks": [ConsoleCallbackHandler()]
+    }
+    response = await agent.ainvoke({"messages": messages}, config=config)
     return response["structured_response"]
 
 if __name__ == "__main__":

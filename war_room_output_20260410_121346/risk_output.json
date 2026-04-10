@@ -1,0 +1,26 @@
+{
+  "risk_summary": "The detected anomalies indicate significant deviations in critical product metrics, suggesting potential instability, performance issues, and user experience risks. Key areas include conversion rates, retention, crashes, latency, and churn, which collectively raise concerns about product health and user satisfaction.",
+  "anomalies_detected": 13,
+  "high_risk_areas": [
+    "signup_conversion_pct (unusually low)",
+    "dau and wau (sudden drop)",
+    "d1_retention_pct (spike)",
+    "d7_retention_pct (unusually low)",
+    "crash_rate_pct (spike)",
+    "api_p95_latency_ms (spike)",
+    "payment_success_rate_pct (spike, likely data error but warrants investigation)",
+    "support_tickets (spike)",
+    "churn_rate_pct (spike)"
+  ],
+  "challenges": [
+    "Why is signup_conversion_pct unusually low at the start? Could there be a misalignment in onboarding or marketing?",
+    "What caused the sudden drop in daily active users (dau) and weekly active users (wau)? Is this due to external factors or internal issues?",
+    "The spike in d1_retention_pct (80.33%) is unusual. Could this indicate a data anomaly, or is there a specific event driving this?",
+    "The high crash_rate_pct and api_p95_latency_ms spikes suggest backend or infrastructure instability. Are there recent deployments or changes that could explain this?",
+    "The payment_success_rate_pct anomalies (values >100%) are likely data errors, but why did they occur? Could this be a reporting issue or actual fraudulent activity?",
+    "The spike in support_tickets may indicate user frustration. Is this correlated with the crash or latency issues?",
+    "The churn_rate_pct spike (5.01%) is concerning. Are users leaving due to the observed performance or other factors?",
+    "Is the data integrity intact? Some anomalies (e.g., payment_success_rate_pct) suggest potential errors in metrics collection or reporting."
+  ],
+  "recommendation": "Immediately validate the following:\n1. Investigate the root cause of the crash_rate_pct and api_p95_latency_ms spikes to mitigate backend instability.\n2. Audit the payment_success_rate_pct anomalies to rule out data errors and investigate potential fraud or reporting issues.\n3. Analyze the drop in dau/wau and correlation with signup_conversion_pct to identify user drop-off points.\n4. Correlate support_tickets with other anomalies to determine if user frustration is linked to performance issues.\n5. Verify data integrity for all metrics, especially those with implausible values (e.g., payment_success_rate_pct > 100%).\n6. Assess whether recent changes (e.g., deployments, marketing campaigns) align with observed anomalies."
+}
