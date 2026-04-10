@@ -1,0 +1,23 @@
+{
+  "risk_summary": "The product launch metrics reveal significant anomalies that indicate potential instability and risk areas. Key concerns include sudden drops in user acquisition (DAU, WAU), inconsistent retention patterns, spikes in crash rates and latency, and outliers in payment success rates. These anomalies suggest underlying issues that could impact user experience, system reliability, and revenue stability.",
+  "anomalies_detected": 13,
+  "high_risk_areas": [
+    "signup_conversion_pct (sudden drop)",
+    "dau and wau (unexpected decline)",
+    "crash_rate_pct (spikes)",
+    "api_p95_latency_ms (high latency)",
+    "payment_success_rate_pct (outliers exceeding 100%)",
+    "support_tickets (sudden increase)",
+    "churn_rate_pct (spike)",
+    "retention_pct (inconsistent trends)"
+  ],
+  "challenges": [
+    "Why did DAU and WAU drop sharply while signup conversion remained unusually high? Is this due to data sampling issues or a genuine user behavior shift?",
+    "What caused the sudden spike in crash rates and API latency? Is this related to recent infrastructure changes or traffic patterns?",
+    "How can payment success rates exceed 100%? Is this a data error or a result of incorrect calculations?",
+    "Why is Day 1 retention unusually high while Day 7 retention dropped significantly? Does this indicate early engagement followed by quick churn?",
+    "Are the spikes in support tickets correlated with the crash rates or other anomalies? If so, what is the root cause?",
+    "Is the churn rate spike isolated to a specific user segment, or is it widespread? What actions are being taken to address it?"
+  ],
+  "recommendation": "Immediately validate the following:\n1. Investigate the DAU/WAU drop and crash rate spikes with engineering and data teams to identify root causes.\n2. Audit payment success rate calculations to resolve the logical inconsistency (values > 100%).\n3. Correlate support ticket spikes with crash data and user feedback to prioritize fixes.\n4. Analyze retention trends by user segment to understand churn drivers.\n5. Stress-test the API and backend systems to rule out infrastructure-related instability.\nPrioritize transparency with stakeholders on the findings and mitigation plans."
+}
