@@ -51,7 +51,7 @@ model = ChatMistralAI(
 )
 
 agent = create_agent(
-    model=model,
+    model,
     tools=[summarize_metrics, anomaly_detection],
     response_format=DataAnalystOutput
 )

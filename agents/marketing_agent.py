@@ -39,7 +39,7 @@ model = ChatMistralAI(
 )
 
 agent = create_agent(
-    model=model,
+    model,
     tools=[semantic_feedback_tool],
     response_format=MarketingAgentOutput
 )

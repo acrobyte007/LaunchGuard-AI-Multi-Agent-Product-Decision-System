@@ -60,7 +60,7 @@ model = ChatMistralAI(
 )
 
 agent = create_agent(
-    model=model,
+    model,
     tools=[],
     response_format=PMAgentOutput
 )
