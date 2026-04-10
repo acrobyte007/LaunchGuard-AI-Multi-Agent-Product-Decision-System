@@ -1,22 +1,56 @@
-# LaunchGuard-AI-Multi-Agent-Product-Decision-System
-## SETUP INSTRUCTIONS
-### 1. clone the repository
-```git clone https://github.com/acrobyte007/LaunchGuard-AI-Multi-Agent-Product-Decision-System
-```
-### 2. create a virtual environment and activate it
-```python -m venv venv
-```
-### 3.install requirements
-```pip install -r requirements.txt
-```
-### 4. create a .env file with the following variables
+#  LaunchGuard AI – Multi-Agent Product Decision System
 
+## 🛠 Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/acrobyte007/LaunchGuard-AI-Multi-Agent-Product-Decision-System
+cd LaunchGuard-AI-Multi-Agent-Product-Decision-System
 ```
-MISTRAL_API_KEY=mistral_api_key
+
+### 2. Create and Activate a Virtual Environment
+```bash
+python -m venv venv
 ```
-### 5. run the main.py file from the root directory
-```python main.py
+
+- On Windows:
+```bash
+venv\Scripts\activate
 ```
-### 6.An output folder will be created in the root directory containing the results of the analysis
-There will 5 json files containing the results of the analysis for each agent
-final_decision.json contains the final decision of the system
+
+- On macOS/Linux:
+```bash
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Create Environment Variables File
+
+Create a `.env` file in the root directory and add:
+
+```env
+MISTRAL_API_KEY=your_mistral_api_key_here
+```
+
+### 5. Run the Application
+```bash
+python main.py
+```
+
+### 6. Output
+
+After execution:
+- An `output/` folder will be created in the root directory.
+- It will contain:
+  - **5 JSON files** → Individual agent analysis results
+  - **`final_decision.json`** → Final aggregated decision of the system
+
+---
+
+## Notes
+- Ensure your API key is valid before running the system.
+- The output files provide detailed insights from each agent as well as the final recommendation.
